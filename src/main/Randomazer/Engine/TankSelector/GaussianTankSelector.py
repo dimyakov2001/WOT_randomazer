@@ -11,14 +11,16 @@ class GaussianTankSelector(TankSelector):
 
     __uniform_tank_selector = None
     __mean = 5
-    __scale = 5
+    __stdev = 5
+    __limits = 5
 
     def __init__(self):
         self.__uniform_tank_selector = UniformTankSelector()
 
-    def set_params(self, mean, scale):
+    def set_params(self, mean, stdev, scale):
         self.__mean = mean
-        self.__scale = scale
+        self.__stdev = stdev
+        self.__limits = scale
 
     def _make_choice(self):
         level_to_chose_tank = self.__get_gaussian_level()
@@ -26,8 +28,7 @@ class GaussianTankSelector(TankSelector):
         return self.__uniform_tank_selector.select(one_level_data)
 
     def __get_gaussian_level(self):
-        sigm = self.__scale / self.__SCALE_TO_SIGM_CONVERT_CONST
-        level_list = norm.rvs(loc=self.__mean, scale=sigm, size=self.__LEVEL_LIST_CAPACITY)
+        level_list = norm.rvs(loc=self.__mean, scale=self.__stdev, size=self.__LEVEL_LIST_CAPACITY)
         level_list = self.__round_level_list(level_list)
         level_list = self.__filter_level_list_by_data(level_list)
         level_list = self.__filter_level_list_by_scale_thresholds(level_list)
@@ -43,8 +44,8 @@ class GaussianTankSelector(TankSelector):
         return list(filter(lambda level: level in data_levels, level_list))
 
     def __filter_level_list_by_scale_thresholds(self, level_list):
-        lower_threshold = self.__mean - self.__scale
-        higher_threshold = self.__mean + self.__scale
+        lower_threshold = self.__mean - self.__limits
+        higher_threshold = self.__mean + self.__limits
         return list(filter(lambda level: lower_threshold <= level <= higher_threshold, level_list))
 
     def __select_level_from_data(self, level):

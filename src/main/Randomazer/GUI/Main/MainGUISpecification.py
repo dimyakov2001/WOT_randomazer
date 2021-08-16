@@ -1,4 +1,4 @@
-from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Checkbutton, Entry, Scale
+from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Checkbutton, Entry, Scale, DoubleVarScale
 import tkinter as tk
 from copy import deepcopy
 from src.main.Randomazer.Settings import Settings
@@ -247,7 +247,22 @@ MAIN_GUI_SPECIFICATION = {
                 "location_dict": {}
             },
             {
-                "object_name": Settings.SCATTER_LEVEL_SCALE_NAME,
+                "object_name": Settings.STD_LEVEL_SCALE_NAME,
+                "gui_object_pattern": DoubleVarScale,
+                "master_object_name": "level_priority_frame",
+                "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 0.1, "to": 3.0, "tickinterval": 0.1,
+                                    "resolution": 0.1, "state": "disabled"},
+                "location_dict": {"sticky": "W"}
+            },
+            {
+                "object_name": Settings.STD_LEVEL_SCALE_LABEL_NAME,
+                "gui_object_pattern": Label,
+                "master_object_name": "level_priority_frame",
+                "properties_dict": {"text": "Стандартное отклонение", "state": "disabled"},
+                "location_dict": {}
+            },
+            {
+                "object_name": Settings.LIMITS_LEVEL_SCALE_NAME,
                 "gui_object_pattern": Scale,
                 "master_object_name": "level_priority_frame",
                 "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 1, "to": 10, "tickinterval": 1,
@@ -255,10 +270,10 @@ MAIN_GUI_SPECIFICATION = {
                 "location_dict": {"sticky": "W"}
             },
             {
-                "object_name": Settings.SCATTER_LEVEL_SCALE_LABEL_NAME,
+                "object_name": Settings.LIMITS_LEVEL_SCALE_LABEL_NAME,
                 "gui_object_pattern": Label,
                 "master_object_name": "level_priority_frame",
-                "properties_dict": {"text": "Разброс", "state": "disabled"},
+                "properties_dict": {"text": "Пределы (+/- уровень)", "state": "disabled"},
                 "location_dict": {}
             }
         ]

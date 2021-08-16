@@ -64,8 +64,9 @@ class ListCreatorsTest(unittest.TestCase):
 class GaussianTankSelectDistributionTest(unittest.TestCase):
     __TEST_RANGE = 1000
 
-    __LEVEL_MEAN = 2
-    __LEVEL_SCATTER = 3
+    __LEVEL_MEAN = 5
+    __LEVEL_STD = 0.2
+    __LEVEL_LIMITS = 5
 
     __data_loader = None
     __tank_selector = None
@@ -93,7 +94,7 @@ class GaussianTankSelectDistributionTest(unittest.TestCase):
         self.__tank_selector = GaussianTankSelector()
 
     def __set_selector_properties(self):
-        self.__tank_selector.set_params(self.__LEVEL_MEAN, self.__LEVEL_SCATTER)
+        self.__tank_selector.set_params(self.__LEVEL_MEAN, self.__LEVEL_STD, self.__LEVEL_LIMITS)
 
     def __load_data(self):
         self.__data = IOCContainer.resolve_dependency(Settings.DATA_OBJECT_NAME)

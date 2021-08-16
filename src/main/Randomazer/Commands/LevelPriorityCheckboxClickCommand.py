@@ -18,13 +18,17 @@ class LevelPriorityCheckboxClickCommand(Command):
 
     def __set_scales_state(self):
         mean_level_scale = IOCContainer.resolve_dependency(Settings.MEAN_LEVEL_SCALE_NAME)
-        dispersion_level_scale = IOCContainer.resolve_dependency(Settings.SCATTER_LEVEL_SCALE_NAME)
+        std_level_scale = IOCContainer.resolve_dependency(Settings.STD_LEVEL_SCALE_NAME)
+        limits_level_scale = IOCContainer.resolve_dependency(Settings.LIMITS_LEVEL_SCALE_NAME)
         GUIObjectUtils.set_gui_object_state(mean_level_scale, self.__level_priority_elements_state)
-        GUIObjectUtils.set_gui_object_state(dispersion_level_scale, self.__level_priority_elements_state)
+        GUIObjectUtils.set_gui_object_state(std_level_scale, self.__level_priority_elements_state)
+        GUIObjectUtils.set_gui_object_state(limits_level_scale, self.__level_priority_elements_state)
 
     def __set_scales_labels_state(self):
         mean_level_scale_label = IOCContainer.resolve_dependency(Settings.MEAN_LEVEL_SCALE_LABEL_NAME)
+        std_level_scale_label = IOCContainer.resolve_dependency(Settings.STD_LEVEL_SCALE_LABEL_NAME)
         dispersion_level_scale_label = IOCContainer.resolve_dependency(
-            Settings.SCATTER_LEVEL_SCALE_LABEL_NAME)
+            Settings.LIMITS_LEVEL_SCALE_LABEL_NAME)
         GUIObjectUtils.set_gui_object_state(mean_level_scale_label, self.__level_priority_elements_state)
+        GUIObjectUtils.set_gui_object_state(std_level_scale_label, self.__level_priority_elements_state)
         GUIObjectUtils.set_gui_object_state(dispersion_level_scale_label, self.__level_priority_elements_state)

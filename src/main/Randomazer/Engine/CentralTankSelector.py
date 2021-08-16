@@ -45,9 +45,10 @@ class CentralTankTankSelector:
 
     def __select_gaussian(self):
         level_priority_mean = self.__get_level_priority_mean()
-        level_priority_scatter = self.__get_level_priority_scatter()
+        level_priority_std = self.__get_level_priority_std()
+        level_priority_limits = self.__get_level_priority_limits()
         selector = self.__selectors[TankSelectionTypes.GAUSSIAN]
-        selector.set_params(level_priority_mean, level_priority_scatter)
+        selector.set_params(level_priority_mean, level_priority_std, level_priority_limits)
         return selector.select(self.__data)
 
     @staticmethod
@@ -55,5 +56,9 @@ class CentralTankTankSelector:
         return IOCContainer.resolve_dependency(Settings.MEAN_LEVEL_SCALE_NAME).get_value()
 
     @staticmethod
-    def __get_level_priority_scatter():
-        return IOCContainer.resolve_dependency(Settings.SCATTER_LEVEL_SCALE_NAME).get_value()
+    def __get_level_priority_std():
+        return IOCContainer.resolve_dependency(Settings.STD_LEVEL_SCALE_NAME).get_value()
+
+    @staticmethod
+    def __get_level_priority_limits():
+        return IOCContainer.resolve_dependency(Settings.LIMITS_LEVEL_SCALE_NAME).get_value()
