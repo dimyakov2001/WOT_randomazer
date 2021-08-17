@@ -83,14 +83,21 @@ MAIN_GUI_SPECIFICATION = {
                 "gui_object_pattern": Frame,
                 "master_object_name": "top_frame",
                 "properties_dict": {},
-                "location_dict": {"column": 0, "row": 0}
+                "location_dict": {"column": 0, "row": 0, "padx": 40}
+            },
+            {
+                "object_name": "premium_priority_frame",
+                "gui_object_pattern": Frame,
+                "master_object_name": "top_frame",
+                "properties_dict": {},
+                "location_dict": {"column": 1, "row": 0, "padx": 21}
             },
             {
                 "object_name": "output_frame",
                 "gui_object_pattern": Frame,
                 "master_object_name": "top_frame",
                 "properties_dict": {},
-                "location_dict": {"column": 1, "row": 0}
+                "location_dict": {"column": 2, "row": 0, "sticky": "W", "padx": 136}
             },
             {
                 "object_name": "mid_frame",
@@ -126,13 +133,6 @@ MAIN_GUI_SPECIFICATION = {
                 "master_object_name": "mid_frame",
                 "properties_dict": {},
                 "location_dict": {"column": 3, "row": 0, "padx": 20, "sticky": "N"}
-            },
-            {
-                "object_name": "premium_priority_frame",
-                "gui_object_pattern": Frame,
-                "master_object_name": "priority_frame",
-                "properties_dict": {},
-                "location_dict": {"column": 0, "row": 0, "sticky": "NW"}
             },
             {
                 "object_name": "level_priority_frame",
@@ -180,7 +180,7 @@ MAIN_GUI_SPECIFICATION = {
                 "gui_object_pattern": Button,
                 "master_object_name": "start_button_frame",
                 "properties_dict": {"text": "Старт", "width": 25, "height": 5},
-                "location_dict": {"padx": 50}
+                "location_dict": {"padx": 10}
             }
         ],
 
@@ -189,8 +189,8 @@ MAIN_GUI_SPECIFICATION = {
                 "object_name": Settings.OUTPUT_FIELD_NAME,
                 "gui_object_pattern": Entry,
                 "master_object_name": "output_frame",
-                "properties_dict": {"width": 25, "state": "disabled", "font": ("Arial Bold", 14)},
-                "location_dict": {"padx": 0, "sticky": "W"}
+                "properties_dict": {"width": 28, "state": "disabled", "font": ("Arial Bold", 14)},
+                "location_dict": {}
             }
         ],
 
