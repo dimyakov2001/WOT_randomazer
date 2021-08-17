@@ -7,9 +7,15 @@ from src.main.Randomazer.GUI.GUIObjects.GUIVariable import GUIVariable
 class LevelDistributionPlot(GUIObject, GUIVariable):
     __graphics_maker = None
 
+    __SETITEM_DICT = {}
+
     def __init__(self, master, properties_dict):
         self.__graphics_maker = LevelDistributionGraphicsMaker()
         self.__create_canvas(master)
+
+        self.__SETITEM_DICT = {
+            GUIObject.GUI_OBJECT_STATE_FIELD: self.__set_state
+        }
 
     def __create_canvas(self, master_object):
         figure = self.__graphics_maker.make_graphics()
@@ -32,5 +38,23 @@ class LevelDistributionPlot(GUIObject, GUIVariable):
         std = value[1]
         limits = value[2]
         self.__graphics_maker.set_params(mean, std, limits)
+        self.__graphics_maker.make_graphics()
+        self._object.draw()
+
+    def __setitem__(self, key, value):
+        func_to_call = self.__SETITEM_DICT[key]
+        func_to_call.__call__(value)
+
+    def __set_state(self, value):
+        if value == GUIObject.GUI_OBJECT_STATE_DISABLED:
+            self.__disable_graphic()
+        elif value == GUIObject.GUI_OBJECT_STATE_ENABLED:
+            self.__enable_graphics()
+
+    def __disable_graphic(self):
+        self.__graphics_maker.clear()
+        self._object.draw()
+
+    def __enable_graphics(self):
         self.__graphics_maker.make_graphics()
         self._object.draw()

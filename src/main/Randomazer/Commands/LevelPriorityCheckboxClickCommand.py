@@ -11,6 +11,7 @@ class LevelPriorityCheckboxClickCommand(Command):
         self.__get_level_priority_elements_state()
         self.__set_scales_state()
         self.__set_scales_labels_state()
+        self.__set_graphic_state()
 
     def __get_level_priority_elements_state(self):
         level_priority_checkbox = IOCContainer.resolve_dependency(Settings.LEVEL_PRIORITY_CHECKBOX_NAME)
@@ -32,3 +33,7 @@ class LevelPriorityCheckboxClickCommand(Command):
         GUIObjectUtils.set_gui_object_state(mean_level_scale_label, self.__level_priority_elements_state)
         GUIObjectUtils.set_gui_object_state(std_level_scale_label, self.__level_priority_elements_state)
         GUIObjectUtils.set_gui_object_state(dispersion_level_scale_label, self.__level_priority_elements_state)
+
+    def __set_graphic_state(self):
+        level_priority_graphic = IOCContainer.resolve_dependency(Settings.PRIORITY_INDICATOR_NAME)
+        GUIObjectUtils.set_gui_object_state(level_priority_graphic, self.__level_priority_elements_state)

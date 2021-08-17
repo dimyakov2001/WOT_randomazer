@@ -95,3 +95,9 @@ class LevelDistributionGraphicsMaker:
     @staticmethod
     def show_graphics():
         plt.show()
+
+    def clear(self):
+        self.__axes.clear()
+        self.__set_figure_limits()
+        self.__draw_grid()
+        return self.__figure
