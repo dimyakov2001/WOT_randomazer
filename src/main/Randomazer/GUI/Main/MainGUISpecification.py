@@ -1,7 +1,7 @@
 from copy import deepcopy
 import tkinter as tk
 
-from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Entry, Checkbutton, DoubleVarScale, Scale, \
+from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Entry, Checkbutton, DoubleVarScale, IntScale, \
     LevelDistributionPlot
 from src.main.Randomazer.Settings import Settings
 
@@ -241,10 +241,11 @@ MAIN_GUI_SPECIFICATION = {
             },
             {
                 "object_name": Settings.MEAN_LEVEL_SCALE_NAME,
-                "gui_object_pattern": Scale,
+                "gui_object_pattern": IntScale,
                 "master_object_name": "level_priority_frame",
                 "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 1, "to": 10, "tickinterval": 1,
-                                    "resolution": 1, "state": "disabled"},
+                                    "resolution": 1, "state": "disabled",
+                                    "start_position": Settings.MEAN_LEVEL_SCALE_START_VALUE},
                 "location_dict": {"sticky": "W"}
             },
             {
@@ -260,7 +261,8 @@ MAIN_GUI_SPECIFICATION = {
                 "master_object_name": "level_priority_frame",
                 "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 0.1, "to": 3.0,
                                     "tickinterval": 0.1,
-                                    "resolution": 0.1, "state": "disabled"},
+                                    "resolution": 0.1, "state": "disabled",
+                                    "start_position": Settings.STD_LEVEL_SCALE_START_VALUE},
                 "location_dict": {"sticky": "W"}
             },
             {
@@ -272,10 +274,11 @@ MAIN_GUI_SPECIFICATION = {
             },
             {
                 "object_name": Settings.LIMITS_LEVEL_SCALE_NAME,
-                "gui_object_pattern": Scale,
+                "gui_object_pattern": IntScale,
                 "master_object_name": "level_priority_frame",
                 "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 1, "to": 10, "tickinterval": 1,
-                                    "resolution": 1, "state": "disabled"},
+                                    "resolution": 1, "state": "disabled",
+                                    "start_position": Settings.LIMITS_LEVEL_SCALE_START_VALUE},
                 "location_dict": {"sticky": "W"}
             },
             {

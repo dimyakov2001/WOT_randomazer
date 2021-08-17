@@ -15,10 +15,13 @@ class Settings:
     PREMIUM_PRIORITY_CHECKBOX_NAME = "premium_priority"
     LEVEL_PRIORITY_CHECKBOX_NAME = "level_priority"
     MEAN_LEVEL_SCALE_NAME = "mean_level_scale"
+    MEAN_LEVEL_SCALE_START_VALUE = 8
     MEAN_LEVEL_SCALE_LABEL_NAME = "mean_level_scale_label"
     LIMITS_LEVEL_SCALE_NAME = "limit_level_scale"
+    LIMITS_LEVEL_SCALE_START_VALUE = 2
     LIMITS_LEVEL_SCALE_LABEL_NAME = "limit_level_scale_label"
     STD_LEVEL_SCALE_NAME = "std_level_scale"
+    STD_LEVEL_SCALE_START_VALUE = 1.5
     STD_LEVEL_SCALE_LABEL_NAME = "std_level_scale_label"
     PRIORITY_INDICATOR_NAME = "priority_indicator"
     OUTPUT_FIELD_NAME = "output_field"

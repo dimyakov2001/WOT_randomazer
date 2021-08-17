@@ -18,11 +18,14 @@ class LevelDistributionPlot(GUIObject, GUIVariable):
         }
 
     def __create_canvas(self, master_object):
-        figure = self.__graphics_maker.make_graphics()
+        figure = self.__get_figure()
         if isinstance(master_object, GUIObject):
             self._object = FigureCanvasTkAgg(figure, master_object._object)
         else:
             self._object = FigureCanvasTkAgg(figure)
+
+    def __get_figure(self):
+        return self.__graphics_maker.clear()
 
     def keys(self):
         return []

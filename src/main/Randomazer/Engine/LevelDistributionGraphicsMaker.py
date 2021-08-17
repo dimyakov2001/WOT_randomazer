@@ -3,11 +3,14 @@ from matplotlib import pylab as plt
 from matplotlib.pylab import Figure
 import numpy as np
 
+from src.main.Randomazer.Settings import Settings
+
 
 class LevelDistributionGraphicsMaker:
     __PLT_FIGURE_SIZE = (4, 3)
     __PLT_X_LIMITS = [1, 10]
     __PLT_Y_LIMITS = [0, 1]
+    __PLT_FIGURE_FACECOLOR = "#f0f0f0"
 
     __LIMITS_LINES_LOW_Y_COORD = 0
     __LIMIT_LINES_COLOR = "r"
@@ -21,7 +24,7 @@ class LevelDistributionGraphicsMaker:
     __need_to_create_figure = True
 
     __mean = 0
-    __std = __MIN_STD_VALUE
+    __std = 0
     __limits = 0
 
     __figure = None
@@ -35,6 +38,9 @@ class LevelDistributionGraphicsMaker:
 
     def __init__(self):
         if self.__need_to_create_figure:
+            self.__mean = Settings.MEAN_LEVEL_SCALE_START_VALUE
+            self.__std = Settings.STD_LEVEL_SCALE_START_VALUE
+            self.__limits = Settings.LIMITS_LEVEL_SCALE_START_VALUE
             self.__make_figure_and_plot()
             self.__need_to_create_figure = False
 
@@ -47,13 +53,18 @@ class LevelDistributionGraphicsMaker:
             self.__std = std
 
     def make_graphics(self):
-        self.__clear_axes()
-        self.__set_figure_limits()
-        self.__draw_grid()
+        self.__basic_set_up()
         self.__draw_distribution_curve()
         self.__draw_level_limits_lines()
         self.__make_filling()
         return self.__figure
+
+    def __basic_set_up(self):
+        self.__clear_axes()
+        self.__set_figure_limits()
+        self.__set_background_color()
+        self.__draw_grid()
+        self.__set_up_ticks()
 
     def __make_figure_and_plot(self):
         self.__figure = Figure(figsize=self.__PLT_FIGURE_SIZE)
@@ -66,8 +77,17 @@ class LevelDistributionGraphicsMaker:
         self.__axes.set_xlim(self.__PLT_X_LIMITS)
         self.__axes.set_ylim(self.__PLT_Y_LIMITS)
 
+    def __set_background_color(self):
+        self.__figure.patch.set_facecolor(self.__PLT_FIGURE_FACECOLOR)
+        self.__axes.set_facecolor(self.__PLT_FIGURE_FACECOLOR)
+
     def __draw_grid(self):
         self.__axes.grid()
+
+    def __set_up_ticks(self):
+        start_x = self.__PLT_X_LIMITS[0]
+        end_x = self.__PLT_X_LIMITS[1]
+        self.__axes.set_xticks(range(start_x, end_x + 1))
 
     def __draw_level_limits_lines(self):
         left_line_x_coord = self.__mean - self.__limits
@@ -97,7 +117,5 @@ class LevelDistributionGraphicsMaker:
         plt.show()
 
     def clear(self):
-        self.__axes.clear()
-        self.__set_figure_limits()
-        self.__draw_grid()
+        self.__basic_set_up()
         return self.__figure

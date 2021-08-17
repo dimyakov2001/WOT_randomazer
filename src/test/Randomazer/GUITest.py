@@ -5,6 +5,7 @@ from src.main.Randomazer.Engine.SpecificationSupplier.SpecificationSupplier impo
 from src.main.Randomazer.IOCContainer import IOCContainer
 from src.main.Randomazer.Settings import Settings
 from src.test.Randomazer.TestDataLoader import TestDataLoader
+import tkinter as tk
 
 
 class GUITest(unittest.TestCase):
@@ -18,6 +19,8 @@ class GUITest(unittest.TestCase):
         self.__add_checkboxes_descriptions()
         self.__init_gui()
         self.__start_mainloop()
+        scale = tk.Scale()
+        print(scale.keys())
 
     def __init_modules(self):
         self.__data_loader = TestDataLoader()
