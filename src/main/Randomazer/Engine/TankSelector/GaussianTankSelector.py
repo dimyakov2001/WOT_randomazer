@@ -1,7 +1,8 @@
 from src.main.Randomazer.Engine.TankSelector.TankSelector import TankSelector
 from src.main.Randomazer.Engine.TankSelector.UniformTankSelector import UniformTankSelector
+from src.main.Randomazer.Engine.NormalLevelDistribution import NormalLevelDistribution
 from src.main.Randomazer.Settings import Settings
-from scipy.stats import norm
+
 import random
 
 
@@ -28,10 +29,10 @@ class GaussianTankSelector(TankSelector):
         return self.__uniform_tank_selector.select(one_level_data)
 
     def __get_gaussian_level(self):
-        level_list = norm.rvs(loc=self.__mean, scale=self.__stdev, size=self.__LEVEL_LIST_CAPACITY)
+        level_list = NormalLevelDistribution.generate_rvs(self.__mean, self.__stdev, self.__LEVEL_LIST_CAPACITY)
         level_list = self.__round_level_list(level_list)
-        level_list = self.__filter_level_list_by_data(level_list)
         level_list = self.__filter_level_list_by_scale_thresholds(level_list)
+        level_list = self.__filter_level_list_by_data(level_list)
         selected_level = random.choice(level_list)
         return selected_level
 

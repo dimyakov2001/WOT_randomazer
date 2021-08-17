@@ -1,11 +1,12 @@
-from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Checkbutton, Entry, Scale, DoubleVarScale
-import tkinter as tk
 from copy import deepcopy
+import tkinter as tk
+
+from src.main.Randomazer.GUI.GUIObjects import Frame, Label, Button, Entry, Checkbutton, DoubleVarScale, Scale, \
+    LevelDistributionPlot
 from src.main.Randomazer.Settings import Settings
 
 
 class MainGUISpecificationSupplement:
-
     __specification = {}
 
     # singleton realisation
@@ -60,7 +61,7 @@ NATION_COMMON_CHECKBOX_FORMAT_PATTERN = Settings.NATION_PREFIX + Settings.COMMON
 
 MAIN_GUI_SPECIFICATION = {
     "window_params": {
-        "size": "600x450",
+        "size": "1000x450",
         "title": "Randomazer v3.0",
         "name": Settings.MAIN_WINDOW_NAME
     },
@@ -75,7 +76,7 @@ MAIN_GUI_SPECIFICATION = {
                 "gui_object_pattern": Frame,
                 "master_object_name": Settings.MAIN_WINDOW_NAME,
                 "properties_dict": {},
-                "location_dict": {"pady": 10}
+                "location_dict": {"pady": 10, "sticky": "W"}
             },
             {
                 "object_name": "start_button_frame",
@@ -139,6 +140,13 @@ MAIN_GUI_SPECIFICATION = {
                 "master_object_name": "priority_frame",
                 "properties_dict": {},
                 "location_dict": {"column": 0, "row": 1, "pady": 15, "sticky": "N"}
+            },
+            {
+                "object_name": "priority_indication_frame",
+                "gui_object_pattern": Frame,
+                "master_object_name": "mid_frame",
+                "properties_dict": {},
+                "location_dict": {"column": 4, "row": 0, "sticky": "N"}
             }
         ],
 
@@ -250,7 +258,8 @@ MAIN_GUI_SPECIFICATION = {
                 "object_name": Settings.STD_LEVEL_SCALE_NAME,
                 "gui_object_pattern": DoubleVarScale,
                 "master_object_name": "level_priority_frame",
-                "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 0.1, "to": 3.0, "tickinterval": 0.1,
+                "properties_dict": {"orient": tk.HORIZONTAL, "length": 250, "from_": 0.1, "to": 3.0,
+                                    "tickinterval": 0.1,
                                     "resolution": 0.1, "state": "disabled"},
                 "location_dict": {"sticky": "W"}
             },
@@ -274,6 +283,13 @@ MAIN_GUI_SPECIFICATION = {
                 "gui_object_pattern": Label,
                 "master_object_name": "level_priority_frame",
                 "properties_dict": {"text": "Пределы (+/- уровень)", "state": "disabled"},
+                "location_dict": {}
+            },
+            {
+                "object_name": Settings.PRIORITY_INDICATOR_NAME,
+                "gui_object_pattern": LevelDistributionPlot,
+                "master_object_name": "priority_indication_frame",
+                "properties_dict": {},
                 "location_dict": {}
             }
         ]

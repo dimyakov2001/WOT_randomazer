@@ -1,7 +1,7 @@
 import unittest
 
 from src.main.Randomazer import GUI
-from src.main.Randomazer.Engine import SpecificationSupplier
+from src.main.Randomazer.Engine.SpecificationSupplier.SpecificationSupplier import SpecificationSupplier
 from src.main.Randomazer.IOCContainer import IOCContainer
 from src.main.Randomazer.Settings import Settings
 from src.test.Randomazer.TestDataLoader import TestDataLoader

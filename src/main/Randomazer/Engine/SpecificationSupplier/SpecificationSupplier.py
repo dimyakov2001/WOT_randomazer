@@ -1,4 +1,9 @@
-from src.main.Randomazer.Engine.SpecificationSupplier import SpecificationSupplementListCreator as ListCreator
+from src.main.Randomazer.Engine.SpecificationSupplier.SpecificationSupplementListCreator.LevelSupplementListCreator import \
+    LevelSupplementListCreator
+from src.main.Randomazer.Engine.SpecificationSupplier.SpecificationSupplementListCreator.TypeSupplementListCreator import \
+    TypeSupplementListCreator
+from src.main.Randomazer.Engine.SpecificationSupplier.SpecificationSupplementListCreator.NationSupplementListCreator import \
+    NationSupplementListCreator
 from src.main.Randomazer.GUI.Main.MainGUISpecification import MainGUISpecificationSupplement
 from src.main.Randomazer.IOCContainer import IOCContainer
 from src.main.Randomazer.Settings import Settings
@@ -22,9 +27,9 @@ class SpecificationSupplier:
         self.__init_list_creators()
 
     def __init_list_creators(self):
-        self.__level_list_creator = ListCreator.LevelSupplementListCreator()
-        self.__type_list_creator = ListCreator.TypeSupplementListCreator()
-        self.__nation_list_creator = ListCreator.NationSupplementListCreator()
+        self.__level_list_creator = LevelSupplementListCreator()
+        self.__type_list_creator = TypeSupplementListCreator()
+        self.__nation_list_creator = NationSupplementListCreator()
 
     def supply_main_specification_from_data(self):
         self.__load_data_from_ioc()

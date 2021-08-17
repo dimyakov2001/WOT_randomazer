@@ -20,6 +20,7 @@ class Settings:
     LIMITS_LEVEL_SCALE_LABEL_NAME = "limit_level_scale_label"
     STD_LEVEL_SCALE_NAME = "std_level_scale"
     STD_LEVEL_SCALE_LABEL_NAME = "std_level_scale_label"
+    PRIORITY_INDICATOR_NAME = "priority_indicator"
     OUTPUT_FIELD_NAME = "output_field"
     START_BUTTON_NAME = "start_button"
 

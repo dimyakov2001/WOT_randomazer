@@ -16,6 +16,7 @@ from src.main.Randomazer.Commands.CommonCheckboxClickCommand.NationCommonCheckbo
     NationCommonCheckboxClickCommand
 from src.main.Randomazer.Commands.LevelPriorityCheckboxClickCommand import LevelPriorityCheckboxClickCommand
 from src.main.Randomazer.Commands.StartButtonClickCommand import StartButtonClickCommand
+from src.main.Randomazer.Commands.LevelPriorityScaleClickCommand import LevelPriorityScaleClickCommand
 
 
 class MainGUICommandBinder:
@@ -42,6 +43,7 @@ class MainGUICommandBinder:
         self.__init_public_checkboxes_commands()
         self.__init_common_checkboxes_commands()
         self.__init_level_priority_checkbox_command()
+        self.__init_level_priority_scales_command()
 
     def __init_public_checkboxes_commands(self):
         level_public_checkbox_command = LevelPublicCheckboxClickCommand()
@@ -83,6 +85,12 @@ class MainGUICommandBinder:
         nation_common_checkboxes_names = IOCContainer.find_dependency_names_by_regular(
             self.__COMMON_NATION_CHECKBOXES_PATTERN)
         self.__command_binder.bind_command_to_dependency(nation_common_checkboxes_names, nation_common_checkbox_command)
+
+    def __init_level_priority_scales_command(self):
+        level_scales_command = LevelPriorityScaleClickCommand()
+        self.__command_binder.bind_command_to_dependency(Settings.MEAN_LEVEL_SCALE_NAME, level_scales_command)
+        self.__command_binder.bind_command_to_dependency(Settings.STD_LEVEL_SCALE_NAME, level_scales_command)
+        self.__command_binder.bind_command_to_dependency(Settings.LIMITS_LEVEL_SCALE_NAME, level_scales_command)
 
     def init_start_processing_command(self):
         start_button_command = StartButtonClickCommand()
