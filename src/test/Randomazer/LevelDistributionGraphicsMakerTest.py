@@ -1,13 +1,19 @@
 import unittest
 
-from src.main.Randomazer.Engine.LevelDistributionGraphicsMaker import LevelDistributionGraphicsMaker
+from src.main.Randomazer.Engine.PlotMaker.PlotGridDrawer import PlotGridDrawer
+from src.main.Randomazer.Engine.PlotMaker.PlotPack import PlotPack
+import matplotlib.pylab as plt
 
 
-class LevelDistributionGraphicsTest(unittest.TestCase):
-
+class GridDrawerTest(unittest.TestCase):
     def test(self):
-        graphics_maker = None
-        graphics_maker = LevelDistributionGraphicsMaker()
-        graphics_maker.set_params(5, 1, 2)
-        graphics_maker.make_graphics()
-        graphics_maker.show_graphics()
+        figure = plt.Figure(figsize=(12, 8))
+        axes = figure.add_subplot(1, 1, 1)
+
+        plot_pack = PlotPack()
+        plot_pack.figure = figure
+        plot_pack.axes = axes
+
+        PlotGridDrawer.draw_grid_in_plot_pack(plot_pack)
+
+        plt.show()
