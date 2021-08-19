@@ -11,6 +11,3 @@ class PlotPack:
 
     def get_axes(self):
         return self.__axes
-
-    def set_figure(self, figure):
-        self.__figure = figure

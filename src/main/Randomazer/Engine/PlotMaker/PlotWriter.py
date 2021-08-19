@@ -1,6 +1,6 @@
 from src.main.Randomazer.Engine.PlotMaker.PlotGridDrawer import PlotGridDrawer
 from src.main.Randomazer.Engine.NormalLevelDistribution import NormalLevelDistribution
-from matplotlib import pylab
+from src.main.Randomazer.Settings import Settings
 import numpy as np
 
 
@@ -9,8 +9,15 @@ class PlotWriter:
     LIMIT_LINES_COLOR = "r"
     LIMIT_LINES_WIDTH = 2
 
+    DISTRIBUTION_CURVE_RESOLUTION = 1000
+    DISTRIBUTION_HIST_SIZE = 1000
+    DISTRIBUTION_FILLING_RESOLUTION = 100
+
     DISTRIBUTION_CURVE_WIDTH = 2
     DISTRIBUTION_CURVE_COLOR = "b"
+
+    DISTRIBUTION_HIST_COLOR = "g"
+    DISTRIBUTION_HIST_ALPHA = 0.3
 
     __MIN_STD_VALUE = 0.001
 
@@ -27,6 +34,7 @@ class PlotWriter:
         PlotWriter.__draw_level_limits_lines(axes)
         PlotWriter.__draw_distribution_curve(axes)
         PlotWriter.__make_filling(axes)
+        PlotWriter.__draw_distribution(axes)
 
     @staticmethod
     def __clear_axes(axes):
@@ -45,6 +53,31 @@ class PlotWriter:
             PlotWriter.__std = PlotWriter.__MIN_STD_VALUE
 
     @staticmethod
+    def __draw_distribution(axes):
+        rvs_keys, rvs_values = PlotWriter.__make_rvs_stats()
+        axes.bar(rvs_keys, rvs_values, alpha=PlotWriter.DISTRIBUTION_HIST_ALPHA,
+                 color=PlotWriter.DISTRIBUTION_HIST_COLOR)
+
+    @staticmethod
+    def __make_rvs_stats():
+        rvs_dict = PlotWriter.__make_rvs_dict()
+        rvs_keys = sorted(rvs_dict.keys())
+        rvs_values = []
+        for key in rvs_keys:
+            rvs_values.append(rvs_dict[key] / PlotWriter.DISTRIBUTION_HIST_SIZE)
+        return rvs_keys, rvs_values
+
+    @staticmethod
+    def __make_rvs_dict():
+        rvs_dict = {}
+        for i in range(PlotWriter.DISTRIBUTION_HIST_SIZE):
+            level = round(NormalLevelDistribution.generate_rvs(PlotWriter.__mean, PlotWriter.__std, size=1)[0])
+            if level not in rvs_dict.keys():
+                rvs_dict[level] = 0
+            rvs_dict[level] += 1
+        return rvs_dict
+
+    @staticmethod
     def __draw_level_limits_lines(axes):
         left_line_x_coord = PlotWriter.__mean - PlotWriter.__limits
         right_line_x_coord = PlotWriter.__mean + PlotWriter.__limits
@@ -58,7 +91,9 @@ class PlotWriter:
 
     @staticmethod
     def __draw_distribution_curve(axes):
-        x = np.linspace(1, 10, 1000)
+        x_left = Settings.PLOT_X_LIMITS[0]
+        x_right = Settings.PLOT_X_LIMITS[1]
+        x = np.linspace(x_left, x_right, PlotWriter.DISTRIBUTION_CURVE_RESOLUTION)
         y = NormalLevelDistribution.generate_pdf(x, PlotWriter.__mean, PlotWriter.__std)
         axes.plot(x, y, color=PlotWriter.DISTRIBUTION_CURVE_COLOR, linewidth=PlotWriter.DISTRIBUTION_CURVE_WIDTH)
 
@@ -66,7 +101,6 @@ class PlotWriter:
     def __make_filling(axes):
         left_line_x_coord = PlotWriter.__mean - PlotWriter.__limits
         right_line_x_coord = PlotWriter.__mean + PlotWriter.__limits
-        x = np.linspace(left_line_x_coord, right_line_x_coord, 100)
+        x = np.linspace(left_line_x_coord, right_line_x_coord, PlotWriter.DISTRIBUTION_FILLING_RESOLUTION)
         y = NormalLevelDistribution.generate_pdf(x, PlotWriter.__mean, PlotWriter.__std)
         axes.fill_between(x, 0, y, alpha=0.5)
-

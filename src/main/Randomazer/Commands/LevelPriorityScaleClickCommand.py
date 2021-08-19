@@ -1,20 +1,15 @@
 from src.main.Randomazer.Commands.Command import Command
-from src.main.Randomazer.Engine.LevelDistributionGraphicsMaker import LevelDistributionGraphicsMaker
 from src.main.Randomazer.IOCContainer import IOCContainer
 from src.main.Randomazer.Settings import Settings
 
 
 class LevelPriorityScaleClickCommand(Command):
-    __graphics_maker = None
 
     # singleton realisation
     def __new__(cls):
         if not hasattr(cls, 'instance'):
             cls.instance = super().__new__(cls)
         return cls.instance
-
-    def __init__(self):
-        self.__graphics_maker = LevelDistributionGraphicsMaker()
 
     # scale_value is needed for correct gui working. Because tkinter gives 2 arguments calling scale command
     def execute(self, scale_value=None):

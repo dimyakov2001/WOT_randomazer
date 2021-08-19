@@ -58,6 +58,10 @@ class Settings:
     MAIN_WINDOW_NAME = "main_window"
     DATA_OBJECT_NAME = "data"
 
+    PLOT_X_LIMITS = [1, 10]
+    PLOT_Y_LIMITS = [0, 1]
+    PLOT_FIGURE_FACECOLOR = "#f0f0f0"
+
     @staticmethod
     def get_public_checkbox_name_by_group(checkbox_group_name):
         return checkbox_group_name + Settings.PUBLIC_CHECKBOX_POSTFIX
