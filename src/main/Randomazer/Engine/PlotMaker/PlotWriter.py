@@ -2,6 +2,7 @@ from src.main.Randomazer.Engine.PlotMaker.PlotGridDrawer import PlotGridDrawer
 from src.main.Randomazer.Engine.NormalLevelDistribution import NormalLevelDistribution
 from src.main.Randomazer.Settings import Settings
 import numpy as np
+import time
 
 
 class PlotWriter:
@@ -9,9 +10,9 @@ class PlotWriter:
     LIMIT_LINES_COLOR = "r"
     LIMIT_LINES_WIDTH = 2
 
-    DISTRIBUTION_CURVE_RESOLUTION = 1000
-    DISTRIBUTION_HIST_SIZE = 1000
-    DISTRIBUTION_FILLING_RESOLUTION = 100
+    DISTRIBUTION_CURVE_RESOLUTION = 100
+    DISTRIBUTION_HIST_SIZE = 250
+    DISTRIBUTION_FILLING_RESOLUTION = 50
 
     DISTRIBUTION_CURVE_WIDTH = 2
     DISTRIBUTION_CURVE_COLOR = "b"
